@@ -1,35 +1,65 @@
-from flask import Flask, request
-from markupsafe import escape
+""" 
 
-app = Flask(__name__,static_url_path='/static')
-
-@app.route('/')
-def index():
-    name = request.args.get("name", "World")
-    return app.send_static_file('index.html')
-
-@app.route('/view-price')
-def viewprice_page():
-    name = request.args.get("name", "World")
-    return app.send_static_file('view-price.html')
-
-@app.route('/track-price')
-def trackprice_page():
-    name = request.args.get("name", "World")
-    return app.send_static_file('track-price.html')
-
-@app.route('/manage-trackers')
-def managetrackers_page():
-    name = request.args.get("name", "World")
-    return app.send_static_file('manage-trackers.html')
-
-@app.route('/export-prices')
-def exportprices_page():
-    name = request.args.get("name", "World")
-    return app.send_static_file('export-prices.html')
+1. Add Tracker
+2. View Trackers
+3. Remove Tracker
+4. View Price Only
+ """
 
 
-""" if __name__ == "__main__":
-    app.run(debug=True) """
+""" 
+ 1. Add Tracker
+    - Enter Link, Threshold value, email
+    - Validate Link
+    - Add Tracker
+ 
+"""
 
-""" TO run : python -m flask run """
+def validate():
+    pass
+
+def add_tracker(link,threshold_value,email):
+    pass
+
+def view_tracker():
+    pass
+
+def remove_tracker():
+    pass
+
+def view_price():
+    pass
+
+def tracker():
+    pass
+
+
+def main():
+    while True:
+        m1 = """    
+        Please Select option:
+            1. Add Tracker
+            2. View Trackers
+            3. Remove Tracker
+            4. View Price Only
+            5. Exit
+        """
+        print(m1)
+
+        ch = int(input("Enter Choice: "))
+        if ch == 1:
+            print("Add Tracker f ")
+        elif ch == 2:
+            print("View Tracker fn")
+        elif ch == 3:
+            print("Remove Tracker fn")
+        elif ch == 4:
+            print("View Price Only")
+        elif ch == 5:
+            break
+        else:
+            print("Please enter correct choice")
+
+
+if __name__=="__main__":
+    main()
