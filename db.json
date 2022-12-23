@@ -1,1 +1,18 @@
-[{"age": 25}, {"age": 25}]
+{
+    "gk@gmail.com": {
+        "trackername": [
+            "link",
+            "threshold value"
+        ]
+    },
+    "viren@gmail.com": {
+        "trackername": [
+            "link",
+            "threshold value"
+        ],
+        "trackername2": [
+            "https://amazon.de/viren/track2",
+            34
+        ]
+    }
+}

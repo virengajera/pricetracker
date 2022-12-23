@@ -1,19 +1,19 @@
 import json
 import re
 
+
 def read_db():
-    json_file = open('db.json','r')
+    json_file = open('db.json', 'r')
     data = json.load(json_file)
     json_file.close()
     return data
 
 
 def update_db(data):
-    json_file = open('db.json','w')
-    json.dump(data,json_file)
+    json_file = open('db.json', 'w')
+    json.dump(data, json_file)
     json_file.close()
-    return "Data Updated"
-
+    print("Data Updated")
 
 
 def isValidLink(link):
@@ -23,24 +23,83 @@ def isValidLink(link):
         return True
     else:
         return False
-    print()
 
-def add_tracker(email,link,threshold_value):
+
+def isValidEmail(email):
+    email_regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+    if (re.fullmatch(email_regex, email)):
+        print("Valid Email")
+        return True
+    else:
+        return False
+
+
+def isEmailExists(email):
     r_data = read_db()
-    if not(isValidLink(link)):
+    if r_data.get(email) == None:
+        return False
+    else:
+        return True
+
+
+def isTrackerExists(email, tracker_name):
+    r_data = read_db()
+    if r_data[email].get(tracker_name) == None:
+        return False
+    else:
+        print("Tracker Name Already exists")
+        return True
+
+
+def add_tracker(email, tracker_name, link, threshold_value):
+    r_data = read_db()
+
+    if not (isValidLink(link)):
         print("Invalid URL")
-    
+    if not (isValidEmail(email)):
+        print("Invalid Email")
+
+    if not (isEmailExists(email)):
+        r_data[email] = {}
+
+    if not (isTrackerExists(email, tracker_name)):
+        r_data[email][tracker_name] = []
+
+    r_data[email][tracker_name].append(link)
+    r_data[email][tracker_name].append(threshold_value)
+
+    update_db(r_data)
+
 
 def view_tracker(email):
-    pass
+    r_data = read_db()
+    if not (isValidEmail(email)):
+        print("Invalid Email")
+        return
+    
+    if not(isEmailExists(email)):
+        print("Email does not exists")
+        return
+    print("********** LIST OF TRACKERS ************")
+    print("--------------------------------")
+    for k,v in r_data.get(email).items():
+        print("Tracker Name : ", k)
+        print("Link : ", v[0])
+        print("Threshold Values : ", v[1])
+        print("--------------------------------")
 
 def remove_tracker():
     pass
 
-def view_price():
-    link = input("Enter Link Here: ")
-    validate(link)
+
+def view_price(link):
+    link = input("Enter Link Here : ")
+    if not (isValidLink(link)):
+        print("Invalid Link")
+        print()
+
     print("Here is the price")
+
 
 def tracker():
     pass
@@ -48,7 +107,7 @@ def tracker():
 
 def main():
     while True:
-        m1 = """    
+        m1 = """
         Please Select option:
             1. Add Tracker
             2. View Trackers
@@ -58,22 +117,31 @@ def main():
         """
         print(m1)
 
-        ch = int(input("Enter Choice: "))
+        ch = int(input("Enter Choice : "))
+
         if ch == 1:
-            print("Add Tracker f ")
-            add_tracker("a","b","c")
+
+            email = input("Enter Email  :  ")
+            tracker_name = input("Enter Tracker Name  :  ")
+            link = input("Enter Link  :  ")
+            threshold_value = int(input("Enter Threshold Value  :  "))
+            add_tracker(email, tracker_name, link, threshold_value)
+
         elif ch == 2:
-            print("View Tracker fn")
+
+            email = input("Enter Email  :  ")
+            view_tracker(email)
+
         elif ch == 3:
             print("Remove Tracker fn")
         elif ch == 4:
             print("View Price Only")
-            view_price()
+            view_price(link)
         elif ch == 5:
             break
         else:
             print("Please enter correct choice")
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     main()
