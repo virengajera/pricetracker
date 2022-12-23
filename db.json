@@ -1,18 +1,1 @@
-{
-    "gk@gmail.com": {
-        "trackername": [
-            "link",
-            "threshold value"
-        ]
-    },
-    "viren@gmail.com": {
-        "trackername": [
-            "link",
-            "threshold value"
-        ],
-        "trackername2": [
-            "https://amazon.de/viren/track2",
-            34
-        ]
-    }
-}
+{"gk@gmail.com": {}, "viren@gmail.com": {"trackername": ["link", "threshold value"], "trackername2": ["https://amazon.de/viren/track2", 34]}}

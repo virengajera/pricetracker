@@ -17,7 +17,7 @@ def update_db(data):
 
 
 def isValidLink(link):
-    amz = link[:18]
+    amz = link[:18].lower()
     if amz == "https://amazon.de/":
         print("Valid amazon url")
         return True
@@ -80,6 +80,7 @@ def view_tracker(email):
     if not(isEmailExists(email)):
         print("Email does not exists")
         return
+
     print("********** LIST OF TRACKERS ************")
     print("--------------------------------")
     for k,v in r_data.get(email).items():
@@ -88,9 +89,25 @@ def view_tracker(email):
         print("Threshold Values : ", v[1])
         print("--------------------------------")
 
-def remove_tracker():
-    pass
 
+def remove_tracker(email, tracker_name):
+    r_data = read_db()
+
+    if not (isValidEmail(email)):
+        print("Invalid Email")
+        return
+    
+    if not (isEmailExists(email)):
+        print("Email does not exists")
+        return
+
+    if not (isTrackerExists(email, tracker_name)):
+        print("Tracker Name does not exists")
+        return
+    
+    del r_data[email][tracker_name]
+
+    update_db(r_data)
 
 def view_price(link):
     link = input("Enter Link Here : ")
@@ -117,23 +134,27 @@ def main():
         """
         print(m1)
 
-        ch = int(input("Enter Choice : "))
+        ch = int(input("Enter Choice : ").strip())
 
         if ch == 1:
 
-            email = input("Enter Email  :  ")
-            tracker_name = input("Enter Tracker Name  :  ")
-            link = input("Enter Link  :  ")
-            threshold_value = int(input("Enter Threshold Value  :  "))
+            email = input("Enter Email  :  ").strip().lower()
+            tracker_name = input("Enter Tracker Name  :  ").strip().lower()
+            link = input("Enter Link  :  ").strip()
+            threshold_value = int(input("Enter Threshold Value  :  ").strip())
             add_tracker(email, tracker_name, link, threshold_value)
 
         elif ch == 2:
 
-            email = input("Enter Email  :  ")
+            email = input("Enter Email  :  ").strip().lower()
             view_tracker(email)
 
         elif ch == 3:
-            print("Remove Tracker fn")
+            
+            email = input("Enter Email  :  ").strip().lower()
+            tracker_name = input("Enter Tracker Name  :  ").strip().lower()
+            remove_tracker(email,tracker_name)
+            
         elif ch == 4:
             print("View Price Only")
             view_price(link)
