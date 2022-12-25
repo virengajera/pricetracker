@@ -1,28 +1,27 @@
-from selenium import webdriver
+import requests 
 from bs4 import BeautifulSoup
-import requests
-import pickle
 
-driver = webdriver.Chrome("/usr/lib/chromium-browser/chromedriver")
+def formatPrice(price):
+    price = price[:-1]
+    #price = price.replace('€','')
+    price = price.replace('.','')
+    price = price.replace(',','.')
+    price = float(price)
+    return price
 
-#driver.get("https://www.amazon.de/Google-Pixel-Entsperrtes-Android-Smartphone-Weitwinkelobjektiv/dp/B0BDJFKY7B/ref=sr_1_1_sspa?keywords=google+pixel+8&qid=1671905403&sr=8-1-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1")
-#driver.get("https://www.amazon.de/SONAX-Winter-Scheibenwaschwasser-mischbereit-schlierenfrei-Antikalk-Effekt/dp/B001050QSA/ref=zg-bs_automotive_sccl_2/262-6899482-3568810?pd_rd_w=kHVZD&content-id=amzn1.sym.a6d00793-4052-45a8-b02b-f64c7eefbdaa&pf_rd_p=a6d00793-4052-45a8-b02b-f64c7eefbdaa&pf_rd_r=QGX7Z236JPZHJENXSZN5&pd_rd_wg=LLEYv&pd_rd_r=cece86aa-59a5-4b5a-a5d2-758a24850a66&pd_rd_i=B001050QSA&th=1")
-
-#content = driver.page_source
-
-#soup = BeautifulSoup(content)
-
+link = "https://www.amazon.de/-/en/SEVERIN-Baking-Versatile-Capacity-2067/dp/B084WQ9183/ref=sr_1_6?crid=1XV1UQA6RQCJ&keywords=severin+backblech&qid=1671973139&sprefix=severin+oven%2Caps%2C496&sr=8-6"
 def scrapping(link):
-    soup = ""
-    driver.get(link)
-    content = driver.page_source
-    soup = BeautifulSoup(content,"html.parser")
+
+    HEADERS = ({'User-Agent':
+            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36',
+            'Accept-Language': 'en-US, en;q=0.5'})
+
+    webpage = requests.get(link, headers=HEADERS)  
+    soup = BeautifulSoup(webpage.content)
+    price = soup.find("span", attrs={"class":'a-offscreen'}).text
+    print("++++++++",price,type(price))
+    final_price = formatPrice(price)
+    print(final_price)
+    print(type(final_price))
     
-    result = soup.find('span',attrs={'class':'a-offscreen'}).text
-    print(result)
-
-
-if __name__=='__main__':
-
-    link = input('Please enter the link of product link :')
-    scrapping(link)
+    return final_price
