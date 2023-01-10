@@ -6,6 +6,7 @@ import scrap
     ("7,23",7.23),
     ("7.23",7.23),
     ("7.23€",7.23),
+    ("7.23€",7.23),
     ("7.23€",7.23)
 ])
 def test_formatPrice(price,result):

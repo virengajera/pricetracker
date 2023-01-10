@@ -1,6 +1,4 @@
 import tracker_operations
-import sys
-print(sys.path)
 
 def main():
     while True:

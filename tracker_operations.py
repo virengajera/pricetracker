@@ -75,4 +75,10 @@ def view_price(link):
     print("Price in EUR is : ", price)
 
 def tracker():
-    pass
+    while True:
+        #get data from db
+        #Get link
+        #already tracked yes or no
+        #If yes amazonn hit link
+        #if latest price < threshold value : print message Price dropped
+        #set flag to already tracked to yes
