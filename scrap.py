@@ -2,12 +2,15 @@ import requests
 from bs4 import BeautifulSoup
 
 def formatPrice(price):
-    price = str(price)
+    #price = str(price)
+    print(type(price))
     price = price[:-1]
     #price = price.replace('€','')
     price = price.replace('.','')
     price = price.replace(',','.')
+    print("-",price)
     price = float(price)
+    print("+",price)
     return price
 
 def scrapping(link):
@@ -24,3 +27,7 @@ def scrapping(link):
     final_price = formatPrice(price)
     
     return final_price
+
+
+
+
