@@ -9,6 +9,7 @@ def read_db():
 
 def update_db(data):
     updated = False
+    
     try:
         json_file = open('db.json', 'w')
         json.dump(data, json_file)
@@ -16,5 +17,6 @@ def update_db(data):
         json_file.close()
         updated = True
         return updated
+
     except Exception as E:
         return updated
