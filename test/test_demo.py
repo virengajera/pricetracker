@@ -1,5 +1,8 @@
-import app
 import pytest
+import sys
+
+sys.path.insert(0, '../')
+import app
 
 def test_read_db():
     assert app.read_db() == {};
