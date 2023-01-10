@@ -2,8 +2,6 @@ import re
 import db_operations
 
 def isValidLink(link):
-
-
     if (link[:22] == "https://www.amazon.de/"):
         print("Valid amazon url")
         return True

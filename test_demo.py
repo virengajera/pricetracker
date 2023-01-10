@@ -1,7 +1,4 @@
 import pytest
-import sys
-
-sys.path.insert(0, '../')
 import app
 
 def test_read_db():
@@ -28,6 +25,6 @@ def test_add(Num1,Num2,Result):
     """ Run the code with normal command will also work """
     assert app.sum(Num1,Num2) == Result
 
-
+""" python -m pytest file.py --> to run pytest code """
 """ pytest -v -s  for fixture images https://www.youtube.com/watch?v=JJmTO95AoqE&list=PLS1QulWo1RIaNFUz4zrztWlCJgkpXht-H&index=4&ab_channel=ProgrammingKnowledge """
 
