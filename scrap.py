@@ -1,4 +1,4 @@
-import requests 
+#import requests 
 from bs4 import BeautifulSoup
 
 def formatPrice(price):
@@ -9,7 +9,6 @@ def formatPrice(price):
     price = float(price)
     return price
 
-link = "https://www.amazon.de/-/en/SEVERIN-Baking-Versatile-Capacity-2067/dp/B084WQ9183/ref=sr_1_6?crid=1XV1UQA6RQCJ&keywords=severin+backblech&qid=1671973139&sprefix=severin+oven%2Caps%2C496&sr=8-6"
 def scrapping(link):
 
     HEADERS = ({'User-Agent':
@@ -21,7 +20,5 @@ def scrapping(link):
     price = soup.find("span", attrs={"class":'a-offscreen'}).text
     print("++++++++",price,type(price))
     final_price = formatPrice(price)
-    print(final_price)
-    print(type(final_price))
     
     return final_price
