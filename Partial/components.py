@@ -1,3 +1,5 @@
+import time
+
 def formatPrice(price):
     #price = str(price)
     print(type(price))

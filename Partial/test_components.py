@@ -1,3 +1,6 @@
+import components
+import pytest
+
 @pytest.mark.parametrize("price, result",[
     ("7€",7.0),
     ("7,00€",7.0),
@@ -6,7 +9,7 @@
     ("7.090,55€",7090.55)
 ])
 def test_formatPrice(price,result):
-    assert scrap.formatPrice(price) == result 
+    assert components.formatPrice(price) == result 
 
 
 @pytest.mark.parametrize("current, threshold, result",[
@@ -15,7 +18,7 @@ def test_formatPrice(price,result):
     (5,7,None)
 ])
 def test_tracker(current, threshold, result):
-    assert tracker_operations.tracker(current, threshold) == result
+    assert components.tracker(current, threshold) == result
 
 
 @pytest.mark.parametrize("link, result",[
@@ -26,4 +29,4 @@ def test_tracker(current, threshold, result):
     ("https://www.amazon.de/-/en/SteelSeries-Keyboard-10-Zone-Lighting-Magnetic/dp/B083M9CBD5/ref=lp_193545031_1_1?th=1",True)
 ])
 def test_isValidLink(link,result):
-    assert validation.isValidLink(link) == result
+    assert components.isValidLink(link) == result
