@@ -27,3 +27,10 @@ def tracker(current,threshold):
         #if latest price < threshold value : print message Price dropped
         #set flag to already tracked to yes
     return flag
+
+def isValidLink(link):
+    if (link[:22] == "https://www.amazon.de/"):
+        print("Valid amazon url")
+        return True
+    else:
+        return False

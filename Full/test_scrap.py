@@ -9,4 +9,4 @@ import scrap
     ("7.090,55€",7090.55)
 ])
 def test_formatPrice(price,result):
-    assert scrap.formatPrice(price) == result 
+    assert scrap.formatPrice(price) == result
