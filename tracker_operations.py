@@ -1,6 +1,7 @@
 import db_operations
 import validation
 import scrap
+import time
 
 def add_tracker(email, tracker_name, link, threshold_value):
     r_data = db_operations.read_db()
@@ -76,6 +77,8 @@ def view_price(link):
 
 def tracker():
     while True:
+        time.sleep(2)
+        print("TRACKER IS TRACKING")
         #get data from db
         #Get link
         #already tracked yes or no

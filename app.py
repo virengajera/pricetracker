@@ -1,4 +1,5 @@
 import tracker_operations
+import sys
 
 def main():
     while True:
@@ -46,4 +47,10 @@ def main():
 
 
 if __name__ == "__main__":
+    for args in sys.argv:
+        if args == "track":
+            tracker_operations.tracker()
+            break
+
+    
     main()
