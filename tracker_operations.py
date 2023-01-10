@@ -75,8 +75,14 @@ def view_price(link):
     price = scrap.scrapping(link)
     print("Price in EUR is : ", price)
 
-def tracker():
+def tracker(current,threshold):
+    flag = False
     while True:
+        if current <= threshold:
+            print("Price is dropped")
+            flag = True
+            break;
+
         time.sleep(2)
         print("TRACKER IS TRACKING")
         #get data from db
@@ -85,3 +91,4 @@ def tracker():
         #If yes amazonn hit link
         #if latest price < threshold value : print message Price dropped
         #set flag to already tracked to yes
+    return flag
